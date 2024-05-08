@@ -1,21 +1,21 @@
 import { program } from "commander";
 import fs from "fs";
 import path from "path";
-import { generateBinanceVerifierCircuitInputs } from "../inputs"; ;
+import { generateBinanceVerifierCircuitInputs } from "../helpers/inputs";
 const snarkjs = require("snarkjs");
 
 program
   .requiredOption("--email-file <string>", "Path to email file")
   .requiredOption(
     "--ethereum-address <string>",
-    "Ethereum address to verify twitter handle against"
+    "Ethereum address to verify binance handle against"
   )
   .option("--silent", "No console logs");
 
 program.parse();
 const args = program.opts();
 
-const CIRCUIT_NAME = "twitter";
+const CIRCUIT_NAME = "binance";
 const BUILD_DIR = path.join(__dirname, "../build");
 const OUTPUT_DIR = path.join(__dirname, "../proofs");
 
@@ -79,7 +79,7 @@ async function generate() {
   );
   log("Public Inputs written to", path.join(OUTPUT_DIR, "public.json"));
 
-  const vkey = JSON.parse(fs.readFileSync(path.join(BUILD_DIR, `/artifacts/twitter.vkey.json`)).toString());
+  const vkey = JSON.parse(fs.readFileSync(path.join(BUILD_DIR, `/artifacts/binance.vkey.json`)).toString());
   const proofVerified = await snarkjs.groth16.verify(
     vkey,
     publicSignals,
