@@ -173,7 +173,7 @@ export const MainPage: React.FC<{}> = (props) => {
         />
       )}
       <div className="title">
-        <Header>Proof of Twitter: ZK Email Demo</Header>
+        <Header>Proof of Binance: Onboard Demo</Header>
       </div>
 
       <Col
